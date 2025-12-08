@@ -62,10 +62,10 @@ def visualize_features(data):
     #       - scatter plot, color='blue', alpha=0.6
     #       - labels and title
     #       - grid
-    axes[0, 0].scatter(data['Sq Feet'], data['Price'], color='blue', alpha=0.6)
-    axes[0, 0].set_xlabel('Sq Feet (Thousands of feet)')
+    axes[0, 0].scatter(data['SquareFeet'], data['Price'], color='blue', alpha=0.6)
+    axes[0, 0].set_xlabel('SquareFeet (Thousands of feet)')
     axes[0, 0].set_ylabel('Price ($)')
-    axes[0, 0].set_title('Square Feet vs Price')
+    axes[0, 0].set_title('SquareFeet vs Price')
     axes[0, 0].grid(True, alpha=0.3)
 
     # TODO: Plot 2 (top right): Bedrooms vs Price
@@ -92,11 +92,11 @@ def visualize_features(data):
     #       - scatter plot, color='orange', alpha=0.6
     #       - labels and title
     #       - grid
-    axes[0, 1].scatter(data['Age'], data['Price'], color='green', alpha=0.6)
-    axes[0, 1].set_xlabel('Age (years)')
-    axes[0, 1].set_ylabel('Price ($)')
-    axes[0, 1].set_title('Age vs Price')
-    axes[0, 1].grid(True, alpha=0.3)
+    axes[1, 1].scatter(data['Age'], data['Price'], color='green', alpha=0.6)
+    axes[1, 1].set_xlabel('Age (years)')
+    axes[1, 1].set_ylabel('Price ($)')
+    axes[1, 1].set_title('Age vs Price')
+    axes[1, 1].grid(True, alpha=0.3)
     
     
     # TODO: Use plt.tight_layout() to make plots fit nicely
@@ -123,7 +123,7 @@ def prepare_features(data):
     """
     # TODO: Create a list of feature column names
     #       ['SquareFeet', 'Bedrooms', 'Bathrooms', 'Age']
-    feature_columns = ['Squarefeet', 'Bedroom', 'Bathrooms', 'Age']
+    feature_columns = ['SquareFeet', 'Bedrooms', 'Bathrooms', 'Age']
 
     # TODO: Create X by selecting those columns from data
     X = data[feature_columns]
@@ -133,7 +133,7 @@ def prepare_features(data):
 
     # TODO: Print the shape of X and y
     print(f"\n=== Feature Preparation ===")
-    print(f"Deatures (X) shape: {X.Shape}")
+    print(f"Deatures (X) shape: {X.shape}")
     print(f"Target (y) shape: {y.shape}")
 
     # TODO: Print the feature column names
@@ -309,7 +309,7 @@ def make_prediction(model, sqft, bedrooms, bathrooms, age):
 
     # TODO: Print the house specs and predicted price nicely formatted
     print(f"\n=== New Prediction ===")
-    print(f"Car specs: {sqft:.0f} square feet, {bedrooms} bedrooms, {bathrooms} bathrooms")
+    print(f"Car specs: {sqft:.0f} square feet, {bedrooms} bedrooms, {bathrooms} bathrooms, {age} yrs")
     print(f"Predicted price: ${predicted_price:,.2f}")
 
     # TODO: Return the predicted price
@@ -339,7 +339,7 @@ if __name__ == "__main__":
 
     # Step 5: Train model
     # TODO: Call train_model() with training data and feature names (X.columns)
-    model = train_model(X_train, y_)
+    model = train_model(X_train, y_train,X.columns)
 
     # Step 6: Evaluate model
     # TODO: Call evaluate_model() with model, test data, and feature names
@@ -351,7 +351,7 @@ if __name__ == "__main__":
 
     # Step 8: Make a new prediction
     # TODO: Call make_prediction() for a house of your choice
-    make_prediction(y_test, predictions)
+    make_prediction(model, 2000, 3, 2, 12)
 
     print("\n" + "=" * 70)
     print("✓ Assignment complete! Check your saved plots.")
